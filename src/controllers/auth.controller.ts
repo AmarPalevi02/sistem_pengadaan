@@ -1,22 +1,19 @@
 import { Request, Response } from 'express'
 import * as authService from '../services/auth.service'
+import { Forbidden } from '../errors/forbidden';
+import { BadRequestError } from '../errors/bad-request';
 
 export const register = async (req: Request, res: Response) => {
    try {
       const admin = (req as any).user;
 
-      if (!admin || admin.role !== 'ADMIN') {
-         res.status(403).json({ message: 'Forbidden: Only admin can create accounts' });
-         return;
-      }
+      if (!admin || admin.role !== 'ADMIN') throw new Forbidden("Only admin can create accounts")
 
       const { name, email, password, role } = req.body;
 
       const allowedRoles = ['EMPLOYEE', 'MANAGER', 'PROCUREMENT'];
-      if (!allowedRoles.includes(role)) {
-         res.status(400).json({ message: 'Invalid role provided' });
-         return;
-      }
+
+      if (!allowedRoles.includes(role)) throw new BadRequestError("Invalid role provided")
 
       const result = await authService.register(name, email, password, role);
 
