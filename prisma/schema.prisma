@@ -50,6 +50,9 @@ model Request {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
+  approvedBy String?
+  approvedAt DateTime?
+
   items       Item[]
   approval    Approval?
   procurement Procurement?

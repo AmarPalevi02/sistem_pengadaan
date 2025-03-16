@@ -5,9 +5,11 @@ import cors from 'cors';
 import dotenv from "dotenv"
 
 import errorHandlerMiddleware from './src/middlewares/error-handler'
+
 import authRoutes from './src/routes/auth.routes'
 import adminRoutes from './src/routes/user.routes'
 import employeRoutes from './src/routes/employe.route'
+import managerRoutes from './src/routes/manager.routes'
 
 dotenv.config()
 const prot = process.env.PORT
@@ -22,6 +24,7 @@ app.use(express.json());
 app.use('/auth', authRoutes)
 app.use('/admin', adminRoutes)
 app.use('/employe', employeRoutes)
+app.use('/manager', managerRoutes)
 
 app.use(errorHandlerMiddleware)
 
