@@ -22,9 +22,10 @@ model User {
   role      Role     @default(EMPLOYEE)
   createdAt DateTime @default(now())
 
-  requests     Request[]
-  approvals    Approval[]    @relation("ManagerApproval")
-  procurements Procurement[] @relation("ProcurementOfficer")
+  requests        Request[]
+  approvals       Approval[]        @relation("ManagerApproval")
+  procurements    Procurement[]     @relation("ProcurementOfficer")
+  TrackingHistory TrackingHistory[]
 }
 
 enum Role {
@@ -94,6 +95,52 @@ model Procurement {
   receivedByEmployee Boolean   @default(false)
   receivedAt         DateTime?
   receiptNotes       String?
+
+  procurementItems  ProcurementItem[]
+  Vendor            Vendor?             @relation(fields: [vendorId], references: [id])
+  vendorId          String?
+  TrackingHistory   TrackingHistory[]
+  ReceivingDocument ReceivingDocument[]
+}
+
+model ProcurementItem {
+  id            String      @id @default(uuid())
+  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurementId String
+  itemName      String
+  quantity      Int
+  unit          String
+  pricePerUnit  Float
+  totalPrice    Float
+}
+
+model Vendor {
+  id      String  @id @default(uuid())
+  name    String
+  email   String?
+  phone   String?
+  address String?
+
+  procurements Procurement[]
+}
+
+model TrackingHistory {
+  id            String            @id @default(uuid())
+  procurement   Procurement       @relation(fields: [procurementId], references: [id])
+  procurementId String
+  status        ProcurementStatus
+  updatedById   String
+  updatedBy     User              @relation(fields: [updatedById], references: [id])
+  notes         String?
+  updatedAt     DateTime          @default(now())
+}
+
+model ReceivingDocument {
+  id            String      @id @default(uuid())
+  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurementId String
+  fileUrl       String
+  uploadedAt    DateTime    @default(now())
 }
 
 enum Priority {

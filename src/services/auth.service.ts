@@ -29,7 +29,7 @@ export const login = async (email: string, password: string) => {
    const isPasswordValid = await comparePassword(password, user.password);
    if (!isPasswordValid) throw new Unauthorized('Invalid password');
 
-   const token = generateToken({ id: user.id, role: user.role });
+   const token = generateToken({ id: user.id, name: user.name, role: user.role });
 
    const { createdAt, ...userWithoutSensitive } = user;
 
