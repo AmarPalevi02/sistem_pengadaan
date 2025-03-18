@@ -10,6 +10,7 @@ import authRoutes from './src/routes/auth.routes'
 import adminRoutes from './src/routes/user.routes'
 import employeRoutes from './src/routes/employe.route'
 import managerRoutes from './src/routes/manager.routes'
+import procurementsRoutes from './src/routes/procurement.routes'
 
 dotenv.config()
 const prot = process.env.PORT
@@ -25,6 +26,7 @@ app.use('/auth', authRoutes)
 app.use('/admin', adminRoutes)
 app.use('/employe', employeRoutes)
 app.use('/manager', managerRoutes)
+app.use('/procurements', procurementsRoutes)
 
 app.use(errorHandlerMiddleware)
 
