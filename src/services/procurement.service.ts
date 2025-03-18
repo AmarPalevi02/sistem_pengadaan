@@ -1,6 +1,5 @@
-import prisma from "../../prisma/prismaClient"
-
 import { ProcurementStatus } from "@prisma/client"
+import prisma from "../../prisma/prismaClient"
 import { Forbidden, NotFound } from "../errors"
 import { CreateProcurementPayload } from "../types/procurement"
 
@@ -32,7 +31,17 @@ export const getProcurementById = async (id: string) => {
          TrackingHistory: true,
          ReceivingDocument: true,
          request: {
-            include: { employee: true }
+            select: {
+               id: true,
+               requestNumber: true,
+               title: true,
+               description: true,
+               createdAt: true,
+               updatedAt: true,
+               employee: {
+                  select: { id: true, name: true }
+               }
+            },
          }
       }
    })
@@ -68,11 +77,16 @@ export const createProcrutment = async (data: CreateProcurementPayload, procurem
          purchaseOrderNumber: procurementData.purchaseOrderNumber,
          deliveryDate: procurementData.deliveryDate,
          notes: procurementData.notes,
+
          status: "ORDERED",
+
          request: { connect: { id: requestId } },
          procurementOfficer: { connect: { id: procurementOfficerId } },
+
          vendorName: vendor.name,
+
          Vendor: { connect: { id: vendor.id } },
+
          procurementItems: {
             create: itemsWithTotal,
          },
@@ -93,4 +107,3 @@ export const createProcrutment = async (data: CreateProcurementPayload, procurem
 
    return procurement;
 }
-

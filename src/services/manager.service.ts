@@ -19,7 +19,7 @@ export const getRequestDetail = async (requestNumber: string) => {
    return request
 }
 
-export const approveRequest = async (requestNumber: string, managerId: string, notes: string) => {
+export const approveRequest = async (requestNumber: string, managerId: string, approvalByManager: string, notes: string) => {
    const request = await prisma.request.findUnique({
       where: { requestNumber: requestNumber },
    })
@@ -43,6 +43,14 @@ export const approveRequest = async (requestNumber: string, managerId: string, n
          approvedAt: new Date(),
       },
    });
+
+   await prisma.request.update({
+      where: { requestNumber },
+      data: {
+         approvedBy: approvalByManager,
+         approvedAt: new Date()
+      }
+   })
 
    return { message: "Request approved successfully" };
 }
