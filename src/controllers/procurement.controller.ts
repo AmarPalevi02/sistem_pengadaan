@@ -23,7 +23,7 @@ export const getProcurementById = async (req: Request, res: Response) => {
 
       res.status(200).json({
          message: 'Get procurement by id success',
-         result
+         data: result
       })
    } catch (error: any) {
       res.status(404).json({ success: false, message: error.message });
