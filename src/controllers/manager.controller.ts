@@ -45,9 +45,13 @@ export const approveRequestController = async (req: Request, res: Response) => {
 
       const manager = (req as any).user;
       const managerId = manager.id;
-
       const approvalByManager = manager.name
 
+<<<<<<< HEAD
+=======
+      const approvalByManager = manager.name
+
+>>>>>>> 79ac6f0fdf128db32635382930d471e3a2946aae
       const result = await managerServices.approveRequest(requestNumber as string, managerId, approvalByManager, notes)
 
       res.status(201).json({

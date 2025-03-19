@@ -47,3 +47,30 @@ export const createProcurement = async (req: Request, res: Response) => {
       res.status(404).json({ success: false, message: error.message });
    }
 }
+
+export const updateProcurmentStatusController = async (req: Request, res: Response) => {
+   try {
+
+      const { id } = req.params
+      const { status, notes } = req.body
+
+      const procurment = (req as any).user
+      const updatedById = procurment.id
+
+      console.log(status)
+      console.log(notes)
+
+      const result = await procurementServices.updateProcurmentStatus(
+         id,
+         updatedById,
+         status,
+         notes)
+
+      res.status(201).json({
+         message: 'Update status procurement success',
+         data: result
+      })
+   } catch (error: any) {
+      res.status(404).json({ success: false, message: error.message });
+   }
+}

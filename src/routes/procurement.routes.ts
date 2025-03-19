@@ -26,4 +26,11 @@ router.post(
    procurementController.createProcurement
 )
 
+router.patch(
+   "/:id/status",
+   authenticate,
+   authorizeRole(["PROCUREMENT"]),
+   procurementController.updateProcurmentStatusController
+)
+
 export default router
