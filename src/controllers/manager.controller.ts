@@ -47,7 +47,12 @@ export const approveRequestController = async (req: Request, res: Response) => {
       const managerId = manager.id;
       const approvalByManager = manager.name
 
-      const result = await managerServices.approveRequest(requestNumber as string, managerId, notes)
+<<<<<<< HEAD
+=======
+      const approvalByManager = manager.name
+
+>>>>>>> 79ac6f0fdf128db32635382930d471e3a2946aae
+      const result = await managerServices.approveRequest(requestNumber as string, managerId, approvalByManager, notes)
 
       res.status(201).json({
          message: "Request approved succes",
