@@ -107,3 +107,27 @@ export const createProcrutment = async (data: CreateProcurementPayload, procurem
 
    return procurement;
 }
+
+
+export const updateProcurmentStatus = async (
+   id: string,
+   updatedById: string,
+   status: ProcurementStatus,
+   notes?: string
+) => {
+   const procurment = await prisma.procurement.update({
+      where: { id },
+      data: { status }
+   })
+
+   await prisma.trackingHistory.create({
+      data: {
+         procurementId: id,
+         status,
+         updatedById: updatedById,
+         notes
+      }
+   })
+
+   return procurment
+}
