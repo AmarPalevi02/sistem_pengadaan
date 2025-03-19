@@ -55,7 +55,7 @@ export const approveRequest = async (requestNumber: string, managerId: string, a
    return { message: "Request approved successfully" };
 }
 
-export const rejectRequest = async (requestNumber: string, managerId: string, notes: string) => {
+export const rejectRequest = async (requestNumber: string, managerId: string, rejectByManager: string, notes: string) => {
    const request = await prisma.request.findUnique({
       where: { requestNumber: requestNumber }
    })
@@ -79,6 +79,14 @@ export const rejectRequest = async (requestNumber: string, managerId: string, no
          approvedAt: new Date(),
       },
    });
+
+   await prisma.request.update({
+      where: { requestNumber },
+      data: {
+         approvedBy: rejectByManager,
+         approvedAt: new Date()
+      }
+   })
 
    return { message: "Request rejected successfully" };
 }

@@ -73,7 +73,9 @@ export const rejectedRequestController = async (req: Request, res: Response) => 
       const manager = (req as any).user;
       const managerId = manager.id;
 
-      const result = await managerServices.rejectRequest(requestNumber as string, managerId, notes)
+      const rejectByManager = manager.name
+
+      const result = await managerServices.rejectRequest(requestNumber as string, managerId, rejectByManager, notes)
 
       res.status(201).json({
          message: "Request rejected success",
