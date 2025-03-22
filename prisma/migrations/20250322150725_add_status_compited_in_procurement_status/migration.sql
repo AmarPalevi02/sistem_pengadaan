@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `procurement` MODIFY `status` ENUM('ORDERED', 'SHIPPED', 'DELIVERED', 'COMPLETED') NOT NULL;
+
+-- AlterTable
+ALTER TABLE `trackinghistory` MODIFY `status` ENUM('ORDERED', 'SHIPPED', 'DELIVERED', 'COMPLETED') NOT NULL;
