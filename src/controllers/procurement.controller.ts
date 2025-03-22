@@ -74,3 +74,25 @@ export const updateProcurmentStatusController = async (req: Request, res: Respon
       res.status(404).json({ success: false, message: error.message });
    }
 }
+
+export const confirmReceiptController = async (req: Request, res: Response) => {
+   try {
+      const { id } = req.params
+      const { receivedByEmployeeId, receiptNotes } = req.body
+      const file = req.file
+
+      const fileUrl = file ? `/ReceivingDocument/${file.filename}` : undefined;
+
+      const procurment = (req as any).user
+      const procurementOfficerId = procurment.id
+
+      const result = await procurementServices.confirmReceipt(id, receivedByEmployeeId, receiptNotes, fileUrl)
+
+      res.status(201).json({
+         message: 'Receipt confirmed',
+         data: result
+      })
+   } catch (error: any) {
+      res.status(404).json({ success: false, message: error.message });
+   }
+}

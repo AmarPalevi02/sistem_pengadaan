@@ -153,6 +153,7 @@ enum RequestStatus {
   APPROVED
   REJECTED
   PROCESSING
+  DELIVERED
   COMPLETED
 }
 
@@ -165,4 +166,5 @@ enum ProcurementStatus {
   ORDERED
   SHIPPED
   DELIVERED
+  COMPLETED
 }
