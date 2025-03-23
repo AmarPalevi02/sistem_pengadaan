@@ -7,7 +7,7 @@ import dotenv from "dotenv"
 import errorHandlerMiddleware from './src/middlewares/error-handler'
 
 import authRoutes from './src/routes/auth.routes'
-import adminRoutes from './src/routes/user.routes'
+import adminRoutes from './src/routes/admin.routes'
 import employeRoutes from './src/routes/employe.route'
 import managerRoutes from './src/routes/manager.routes'
 import procurmementRoutes from "./src/routes/procurement.routes"
