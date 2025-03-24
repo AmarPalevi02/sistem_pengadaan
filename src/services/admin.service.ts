@@ -25,3 +25,22 @@ export const updateUser = async (userId: string, data: UpdateUser) => {
       }
    })
    return result
+}
+
+export const deleteUser = async (userId: string) => {
+   const checkedIdUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, name: true }
+   })
+
+   if (!checkedIdUser) throw new NotFound("User not found")
+
+   await prisma.user.delete({
+      where: { id: userId }
+   })
+
+   return {
+      deletedUser: checkedIdUser,
+      message: `User ${checkedIdUser.name} has been deleted successfully`
+   }
+}
