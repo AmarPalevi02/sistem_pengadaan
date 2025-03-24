@@ -11,12 +11,19 @@ router.post(
    authenticate,
    authorizeRole(['ADMIN']),
    authController.register)
-   
+
 router.put(
    '/update/:userId',
    authenticate,
    authorizeRole(['ADMIN']),
    userController.updateUser
 );
+
+router.delete(
+   `/:userId/delet`,
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.deleteUserController
+)
 
 export default router;
