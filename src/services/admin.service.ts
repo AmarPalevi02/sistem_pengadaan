@@ -9,7 +9,7 @@ export const updateUser = async (userId: string, data: UpdateUser) => {
    })
 
    if (!checkUserById) throw new NotFound("User is not found")
-   
+
    const hashPassword = data.password
       ? await hashedPassword(data.password)
       : undefined;
@@ -25,4 +25,3 @@ export const updateUser = async (userId: string, data: UpdateUser) => {
       }
    })
    return result
-}

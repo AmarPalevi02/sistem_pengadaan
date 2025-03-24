@@ -11,7 +11,7 @@ router.post(
    authenticate,
    authorizeRole(['ADMIN']),
    authController.register)
-   
+
 router.put(
    '/update/:userId',
    authenticate,
