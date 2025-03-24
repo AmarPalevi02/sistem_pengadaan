@@ -1,6 +1,6 @@
 import prisma from "../../prisma/prismaClient";
 import { NotFound } from "../errors";
-import { UpdateUser } from "../types/createUser";
+import { CreateVendor, UpdateUser } from "../types/createUser";
 import { hashedPassword } from "../utils/bcrypt";
 
 export const updateUser = async (userId: string, data: UpdateUser) => {
@@ -43,4 +43,17 @@ export const deleteUser = async (userId: string) => {
       deletedUser: checkedIdUser,
       message: `User ${checkedIdUser.name} has been deleted successfully`
    }
+}
+
+export const createVendor = async (data: CreateVendor) => {
+   const createVendor = await prisma.vendor.create({
+      data: {
+         name: data.name,
+         email: data.email,
+         phone: data.phone,
+         address: data.address
+      }
+   })
+
+   return createVendor
 }

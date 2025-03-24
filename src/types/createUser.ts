@@ -13,3 +13,9 @@ export interface UpdateUser {
    password?: string,
    role?: Role
 }
+export interface CreateVendor {
+   name: string,
+   email?: string,
+   phone?: string,
+   address?: string
+}
