@@ -26,4 +26,11 @@ router.delete(
    userController.deleteUserController
 )
 
+router.post(
+   '/vendor',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.createVendorController
+)
+
 export default router;
