@@ -25,3 +25,4 @@ export const updateUser = async (userId: string, data: UpdateUser) => {
       }
    })
    return result
+}
