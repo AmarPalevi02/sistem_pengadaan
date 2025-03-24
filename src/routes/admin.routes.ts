@@ -19,11 +19,4 @@ router.put(
    userController.updateUser
 );
 
-router.delete(
-   `/:userId/delet`,
-   authenticate,
-   authorizeRole(['ADMIN']),
-   userController.deleteUserController
-)
-
 export default router;
