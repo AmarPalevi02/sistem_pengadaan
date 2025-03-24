@@ -46,3 +46,32 @@ export const createVendorController = async (req: Request, res: Response) => {
       res.status(400).json({ error: error.message });
    }
 }
+
+export const getAllVendorController = async (req: Request, res: Response) => {
+   try {
+      const result = await adminServices.getAllVendor()
+
+      res.status(200).json({
+         message: "Succes get all vendor",
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
+export const updateVendorController = async (req: Request, res: Response) => {
+   try {
+      const { vendorId } = req.params
+      const payload = req.body
+
+      const result = await adminServices.updateVendor(vendorId, payload)
+
+      res.status(201).json({
+         message: "Succes update vendor",
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}

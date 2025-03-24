@@ -19,3 +19,10 @@ export interface CreateVendor {
    phone?: string,
    address?: string
 }
+
+export interface UpdateVendor {
+   name?: string,
+   email?: string,
+   phone?: string,
+   address?: string
+}
