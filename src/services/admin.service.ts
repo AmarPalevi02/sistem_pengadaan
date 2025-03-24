@@ -1,6 +1,6 @@
 import prisma from "../../prisma/prismaClient";
 import { NotFound } from "../errors";
-import { CreateVendor, UpdateUser } from "../types/createUser";
+import { CreateVendor, UpdateUser, UpdateVendor } from "../types/createUser";
 import { hashedPassword } from "../utils/bcrypt";
 
 export const updateUser = async (userId: string, data: UpdateUser) => {
@@ -56,4 +56,30 @@ export const createVendor = async (data: CreateVendor) => {
    })
 
    return createVendor
+}
+
+export const getAllVendor = async () => {
+   const getAllVendor = await prisma.vendor.findMany()
+
+   return getAllVendor
+}
+
+export const updateVendor = async (vendorId: string, data: UpdateVendor) => {
+   const checkVendor = await prisma.vendor.findUnique({
+      where: { id: vendorId }
+   })
+
+   if (!checkVendor) throw new NotFound("Vendor is not vond")
+
+   const result = await prisma.vendor.update({
+      where: { id: vendorId },
+      data: {
+         name: data.name,
+         email: data.email,
+         phone: data.phone,
+         address: data.address
+      }
+   })
+
+   return result
 }

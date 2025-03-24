@@ -27,10 +27,24 @@ router.delete(
 )
 
 router.post(
-   '/vendor',
+   '/vendor/create',
    authenticate,
    authorizeRole(['ADMIN']),
    userController.createVendorController
+)
+
+router.get(
+   "/vendor",
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getAllVendorController
+)
+
+router.put(
+   '/vendor/:vendorId/update',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.updateVendorController
 )
 
 export default router;
