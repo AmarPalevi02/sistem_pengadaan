@@ -25,9 +25,6 @@ model User {
   requests     Request[]
   approvals    Approval[]    @relation("ManagerApproval")
   procurements Procurement[] @relation("ProcurementOfficer")
-  requests        Request[]
-  approvals       Approval[]        @relation("ManagerApproval")
-  procurements    Procurement[]     @relation("ProcurementOfficer")
   TrackingHistory TrackingHistory[]
 }
 
