@@ -29,3 +29,9 @@ export const createRequest = async (data: CreateRequestInput, employeeId: string
 
    return newRequest
 }
+
+export const getAllRequest = async () => {
+   const getAllRequest = await prisma.request.findMany()
+
+   return getAllRequest
+}
