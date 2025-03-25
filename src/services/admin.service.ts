@@ -83,3 +83,21 @@ export const updateVendor = async (vendorId: string, data: UpdateVendor) => {
 
    return result
 }
+
+
+export const destroyVendor = async (vendorId: string) => {
+   const checkedVendor = await prisma.vendor.findUnique({
+      where: { id: vendorId },
+      select: { id: true, name: true }
+   })
+
+   if (!checkedVendor) throw new NotFound("Vendor not found")
+
+   await prisma.vendor.delete({
+      where: { id: vendorId }
+   })
+
+   return {
+      message: `succes deleted vendor ${checkedVendor.name}`
+   }
+}
