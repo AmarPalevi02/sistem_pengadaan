@@ -54,4 +54,5 @@ router.delete(
    userController.destroyVendorController
 )
 
+
 export default router;

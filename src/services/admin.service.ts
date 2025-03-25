@@ -1,5 +1,5 @@
 import prisma from "../../prisma/prismaClient";
-import { NotFound } from "../errors
+import { NotFound } from "../errors"
 import { CreateVendor, UpdateUser, UpdateVendor } from "../types/createUser";
 import { hashedPassword } from "../utils/bcrypt";
 
@@ -83,7 +83,6 @@ export const updateVendor = async (vendorId: string, data: UpdateVendor) => {
 
    return result
 }
-
 
 export const destroyVendor = async (vendorId: string) => {
    const checkedVendor = await prisma.vendor.findUnique({
