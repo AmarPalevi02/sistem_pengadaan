@@ -75,3 +75,18 @@ export const updateVendorController = async (req: Request, res: Response) => {
       res.status(400).json({ error: error.message });
    }
 }
+
+export const destroyVendorController = async (req: Request, res: Response) => {
+   try {
+      const { vendorId } = req.params
+
+      const result = await adminServices.destroyVendor(vendorId)
+
+      res.status(200).json({
+         message: "Succes deleted vendor",
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}

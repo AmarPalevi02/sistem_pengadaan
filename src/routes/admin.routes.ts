@@ -47,4 +47,12 @@ router.put(
    userController.updateVendorController
 )
 
+router.delete(
+   '/vendor/:vendorId',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.destroyVendorController
+)
+
+
 export default router;
