@@ -1,5 +1,5 @@
 import prisma from "../../prisma/prismaClient";
-import { NotFound } from "../errors";
+import { NotFound } from "../errors
 import { CreateVendor, UpdateUser, UpdateVendor } from "../types/createUser";
 import { hashedPassword } from "../utils/bcrypt";
 
