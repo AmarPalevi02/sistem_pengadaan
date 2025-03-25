@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const createRequest = async (data: CreateRequestInput, employeeId: string) => {
    const requestNumber = `REQ-${uuidv4()}`
+
    const newRequest = await prisma.request.create({
       data: {
          requestNumber,
@@ -27,4 +28,10 @@ export const createRequest = async (data: CreateRequestInput, employeeId: string
    })
 
    return newRequest
+}
+
+export const getAllRequest = async () => {
+   const getAllRequest = await prisma.request.findMany()
+
+   return getAllRequest
 }

@@ -12,4 +12,11 @@ router.post(
    employeContriller.createRequestController
 )
 
+router.get(
+   "/requestall",
+   authenticate,
+   authorizeRole(["EMPLOYEE"]),
+   employeContriller.getAllRequestController
+)
+
 export default router
