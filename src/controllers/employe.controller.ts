@@ -8,8 +8,6 @@ export const createRequestController = async (req: Request, res: Response) => {
      
       const result = await employeService.createRequest(req.body, employeeId)
       
-      const result = await employeService.createRequest(req.body, employeeId)
-      
       res.status(201).json({
          message: "Employe succes request",
          result
