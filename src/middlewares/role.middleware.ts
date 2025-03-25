@@ -6,7 +6,7 @@ export const authorizeRole = (roles: string[]) => {
 
       if (!user || !roles.includes(user.role)) {
          res.status(403).json({ error: 'Forbidden' });
-         return; 
+         return;
       }
 
       next();

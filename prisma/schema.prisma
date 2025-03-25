@@ -25,6 +25,10 @@ model User {
   requests     Request[]
   approvals    Approval[]    @relation("ManagerApproval")
   procurements Procurement[] @relation("ProcurementOfficer")
+  requests        Request[]
+  approvals       Approval[]        @relation("ManagerApproval")
+  procurements    Procurement[]     @relation("ProcurementOfficer")
+  TrackingHistory TrackingHistory[]
 }
 
 enum Role {
@@ -50,6 +54,8 @@ model Request {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
+  approvedBy String?
+  approvedAt DateTime?
   items       Item[]
   approval    Approval?
   procurement Procurement?
@@ -91,6 +97,53 @@ model Procurement {
   receivedByEmployee Boolean   @default(false)
   receivedAt         DateTime?
   receiptNotes       String?
+
+
+  procurementItems  ProcurementItem[]
+  Vendor            Vendor?             @relation(fields: [vendorId], references: [id])
+  vendorId          String?
+  TrackingHistory   TrackingHistory[]
+  ReceivingDocument ReceivingDocument[]
+}
+
+model ProcurementItem {
+  id            String      @id @default(uuid())
+  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurementId String
+  itemName      String
+  quantity      Int
+  unit          String
+  pricePerUnit  Float
+  totalPrice    Float
+}
+
+model Vendor {
+  id      String  @id @default(uuid())
+  name    String
+  email   String?
+  phone   String?
+  address String?
+
+  procurements Procurement[]
+}
+
+model TrackingHistory {
+  id            String            @id @default(uuid())
+  procurement   Procurement       @relation(fields: [procurementId], references: [id])
+  procurementId String
+  status        ProcurementStatus
+  updatedById   String
+  updatedBy     User              @relation(fields: [updatedById], references: [id])
+  notes         String?
+  updatedAt     DateTime          @default(now())
+}
+
+model ReceivingDocument {
+  id            String      @id @default(uuid())
+  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurementId String
+  fileUrl       String
+  uploadedAt    DateTime    @default(now())
 }
 
 enum Priority {
@@ -103,6 +156,7 @@ enum RequestStatus {
   APPROVED
   REJECTED
   PROCESSING
+  DELIVERED
   COMPLETED
 }
 
@@ -115,4 +169,5 @@ enum ProcurementStatus {
   ORDERED
   SHIPPED
   DELIVERED
+  COMPLETED
 }
