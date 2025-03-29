@@ -19,4 +19,11 @@ router.get(
    employeContriller.getAllRequestController
 )
 
+router.patch(
+   "/:requestId/cenceled",
+   authenticate,
+   authorizeRole(["EMPLOYEE"]),
+   employeContriller.cenceldRequestController
+)
+
 export default router

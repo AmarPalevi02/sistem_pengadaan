@@ -5,9 +5,9 @@ export const createRequestController = async (req: Request, res: Response) => {
    try {
       const employee = (req as any).user;
       const employeeId = employee.id;
-     
+
       const result = await employeService.createRequest(req.body, employeeId)
-      
+
       res.status(201).json({
          message: "Employe succes request",
          result
@@ -25,6 +25,25 @@ export const getAllRequestController = async (req: Request, res: Response) => {
          message: "Succes get all request",
          data: result
       })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
+export const cenceldRequestController = async (req: Request, res: Response) => {
+   try {
+      const { requestId } = req.params
+
+      const employee = (req as any).user
+      const employeeId = employee.id
+
+      const result = await employeService.cenceldRequest(requestId, employeeId)
+
+      res.status(201).json({
+         message: "Succes cenceled request",
+         data: result
+      })
+
    } catch (error: any) {
       res.status(400).json({ error: error.message });
    }
