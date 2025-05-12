@@ -101,6 +101,20 @@ export const getAllVendorController = async (req: Request, res: Response) => {
    }
 }
 
+export const countVendorsController = async (req: Request, res: Response) => {
+   try {
+      const result = await adminServices.getCountVendor()
+
+      res.status(200).json({
+         message: "Succes",
+         status: 200,
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
 export const updateVendorController = async (req: Request, res: Response) => {
    try {
       const { vendorId } = req.params

@@ -82,6 +82,12 @@ export const createVendor = async (data: CreateVendor) => {
    return createVendor
 }
 
+export const getCountVendor = async () => {
+   const countVendor = await prisma.vendor.count()
+
+   return { count: countVendor }
+}
+
 export const getAllVendor = async () => {
    const getAllVendor = await prisma.vendor.findMany()
 

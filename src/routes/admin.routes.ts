@@ -61,6 +61,13 @@ router.get(
    userController.getAllVendorController
 )
 
+router.get(
+   "/countvendors",
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.countVendorsController
+)
+
 router.put(
    '/vendor/:vendorId/update',
    authenticate,
