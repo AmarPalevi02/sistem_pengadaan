@@ -27,6 +27,30 @@ export const updateUser = async (userId: string, data: UpdateUser) => {
    return result
 }
 
+export const getAllUserEmployee = async () => {
+   const getAllEmployee = await prisma.user.count({
+      where: { role: 'EMPLOYEE' }
+   })
+
+   return { count: getAllEmployee }
+}
+
+export const getAllUserProcurment = async () => {
+   const getAllProcurment = await prisma.user.count({
+      where: { role: 'PROCUREMENT' }
+   })
+
+   return { count: getAllProcurment }
+}
+
+export const getAllUserManager = async () => {
+   const getAllManager = await prisma.user.count({
+      where: { role: 'MANAGER' }
+   })
+
+   return { count: getAllManager }
+}
+
 export const deleteUser = async (userId: string) => {
    const checkedIdUser = await prisma.user.findUnique({
       where: { id: userId },

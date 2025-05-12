@@ -19,6 +19,27 @@ router.put(
    userController.updateUser
 );
 
+router.get(
+   '/employees',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getAllEmployee
+)
+
+router.get(
+   '/procutments',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getAllProcurment
+)
+
+router.get(
+   '/managers',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getAllManager
+)
+
 router.delete(
    `/:userId/delet`,
    authenticate,
