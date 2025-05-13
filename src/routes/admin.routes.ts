@@ -40,6 +40,27 @@ router.get(
    userController.getAllManager
 )
 
+router.get(
+   '/datasmanager',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getDatasManagersController
+)
+
+router.get(
+   '/datasEmployee',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getDatasEmployeesController
+)
+
+router.get(
+   '/datasprocurements',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getDatasProcurmentsController
+)
+
 router.delete(
    `/:userId/delet`,
    authenticate,

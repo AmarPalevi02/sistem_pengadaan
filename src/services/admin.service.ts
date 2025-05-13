@@ -94,6 +94,33 @@ export const getAllVendor = async () => {
    return getAllVendor
 }
 
+export const getDatasManagers = async () => {
+   const managers = await prisma.user.findMany({
+      where: { role: "MANAGER" },
+      select: { id: true, name: true, email: true }
+   })
+
+   return managers
+}
+
+export const getDatasEmpoyees = async () => {
+   const employees = await prisma.user.findMany({
+      where: { role: "EMPLOYEE" },
+      select: { id: true, name: true, email: true }
+   })
+
+   return employees
+}
+
+export const getDatasProcurments = async () => {
+   const procurments = await prisma.user.findMany({
+      where: { role: "PROCUREMENT" },
+      select: { id: true, name: true, email: true }
+   })
+
+   return procurments
+}
+
 export const updateVendor = async (vendorId: string, data: UpdateVendor) => {
    const checkVendor = await prisma.vendor.findUnique({
       where: { id: vendorId }

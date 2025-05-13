@@ -61,6 +61,48 @@ export const getAllManager = async (req: Request, res: Response) => {
    }
 }
 
+export const getDatasManagersController = async (req: Request, res: Response) => {
+   try {
+      const result = await adminServices.getDatasManagers()
+
+      res.status(200).json({
+         message: "Succes",
+         status: 200,
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
+export const getDatasEmployeesController = async (req: Request, res: Response) => {
+   try {
+      const result = await adminServices.getDatasEmpoyees()
+
+      res.status(200).json({
+         message: "Succes",
+         status: 200,
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
+export const getDatasProcurmentsController = async (req: Request, res: Response) => {
+   try {
+      const result = await adminServices.getDatasProcurments()
+
+      res.status(200).json({
+         message: "Succes",
+         status: 200,
+         data: result
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
 export const deleteUserController = async (req: Request, res: Response) => {
    try {
       const { userId } = req.params
