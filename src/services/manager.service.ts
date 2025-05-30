@@ -19,9 +19,19 @@ export const getRequestDetail = async (requestNumber: string) => {
    return request
 }
 
-export const approveRequest = async (requestNumber: string, managerId: string, approvalByManager: string, notes: string) => {
+export const approveRequest = async (
+   requestNumber: string,
+   managerId: string,
+   approvalByManager: string,
+   notes: string
+) => {
    const request = await prisma.request.findUnique({
       where: { requestNumber: requestNumber },
+   })
+
+   const manager = await prisma.user.findUnique({
+      where: { id: managerId },
+      select: { name: true }
    })
 
    if (!request) throw new NotFound("Request not found")
@@ -38,6 +48,7 @@ export const approveRequest = async (requestNumber: string, managerId: string, a
       data: {
          requestId: request.id,
          managerId: managerId,
+         managerName: manager?.name,
          status: 'APPROVED',
          notes: notes,
          approvedAt: new Date(),

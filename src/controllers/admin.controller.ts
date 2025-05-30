@@ -109,7 +109,10 @@ export const deleteUserController = async (req: Request, res: Response) => {
 
       const result = await adminServices.deleteUser(userId)
 
-      res.status(200).json({ result })
+       res.status(200).json({
+         message: "Succes deleted vendor",
+         data: result
+      })
    } catch (error: any) {
       res.status(400).json({ error: error.message });
    }

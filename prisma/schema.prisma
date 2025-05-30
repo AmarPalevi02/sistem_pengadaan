@@ -69,14 +69,15 @@ model Item {
 }
 
 model Approval {
-  id         String         @id @default(uuid())
-  request    Request        @relation(fields: [requestId], references: [id])
-  requestId  String         @unique
-  manager    User           @relation("ManagerApproval", fields: [managerId], references: [id])
-  managerId  String
-  status     ApprovalStatus
-  notes      String?
-  approvedAt DateTime       @default(now())
+  id          String         @id @default(uuid())
+  request     Request        @relation(fields: [requestId], references: [id])
+  requestId   String         @unique
+  manager     User           @relation("ManagerApproval", fields: [managerId], references: [id], onDelete: Cascade)
+  managerId   String
+  managerName String?
+  status      ApprovalStatus
+  notes       String?
+  approvedAt  DateTime       @default(now())
 }
 
 model Procurement {

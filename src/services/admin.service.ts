@@ -157,3 +157,5 @@ export const destroyVendor = async (vendorId: string) => {
       message: `succes deleted vendor ${checkedVendor.name}`
    }
 }
+
+
