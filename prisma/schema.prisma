@@ -42,7 +42,7 @@ enum Role {
 model Request {
   id            String        @id @default(uuid())
   requestNumber String        @unique
-  employee      User          @relation(fields: [employeeId], references: [id])
+  employee      User          @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   employeeId    String
   title         String
   description   String?
@@ -60,7 +60,7 @@ model Request {
 
 model Item {
   id            String  @id @default(uuid())
-  request       Request @relation(fields: [requestId], references: [id])
+  request       Request @relation(fields: [requestId], references: [id], onDelete: Cascade)
   requestId     String
   itemName      String
   quantity      Int
@@ -70,7 +70,7 @@ model Item {
 
 model Approval {
   id          String         @id @default(uuid())
-  request     Request        @relation(fields: [requestId], references: [id])
+  request     Request        @relation(fields: [requestId], references: [id], onDelete: Cascade)
   requestId   String         @unique
   manager     User           @relation("ManagerApproval", fields: [managerId], references: [id], onDelete: Cascade)
   managerId   String
@@ -82,9 +82,9 @@ model Approval {
 
 model Procurement {
   id                   String            @id @default(uuid())
-  request              Request           @relation(fields: [requestId], references: [id])
+  request              Request           @relation(fields: [requestId], references: [id], onDelete: Cascade)
   requestId            String            @unique
-  procurementOfficer   User              @relation("ProcurementOfficer", fields: [procurementOfficerId], references: [id])
+  procurementOfficer   User              @relation("ProcurementOfficer", fields: [procurementOfficerId], references: [id], onDelete: Cascade)
   procurementOfficerId String
   purchaseOrderNumber  String
   vendorName           String
@@ -105,7 +105,7 @@ model Procurement {
 
 model ProcurementItem {
   id            String      @id @default(uuid())
-  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurement   Procurement @relation(fields: [procurementId], references: [id], onDelete: Cascade)
   procurementId String
   itemName      String
   quantity      Int
@@ -126,7 +126,7 @@ model Vendor {
 
 model TrackingHistory {
   id            String            @id @default(uuid())
-  procurement   Procurement       @relation(fields: [procurementId], references: [id])
+  procurement   Procurement       @relation(fields: [procurementId], references: [id], onDelete: Cascade)
   procurementId String
   status        ProcurementStatus
   updatedById   String
@@ -137,7 +137,7 @@ model TrackingHistory {
 
 model ReceivingDocument {
   id            String      @id @default(uuid())
-  procurement   Procurement @relation(fields: [procurementId], references: [id])
+  procurement   Procurement @relation(fields: [procurementId], references: [id], onDelete: Cascade)
   procurementId String
   fileUrl       String
   uploadedAt    DateTime    @default(now())

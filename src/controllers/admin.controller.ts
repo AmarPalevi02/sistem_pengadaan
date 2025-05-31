@@ -6,7 +6,6 @@ export const updateUser = async (req: Request, res: Response) => {
       const { userId } = req.params;
       const payload = req.body;
 
-
       const updatedUser = await adminServices.updateUser(userId, payload);
 
       res.status(200).json({
