@@ -108,7 +108,7 @@ export const deleteUserController = async (req: Request, res: Response) => {
 
       const result = await adminServices.deleteUser(userId)
 
-       res.status(200).json({
+      res.status(200).json({
          message: "Succes deleted vendor",
          data: result
       })
@@ -188,4 +188,17 @@ export const destroyVendorController = async (req: Request, res: Response) => {
    } catch (error: any) {
       res.status(400).json({ error: error.message });
    }
+}
+
+export const putVendorController = async (req: Request, res: Response) => {
+   const { vendorId } = req.params
+   const payload = req.body
+
+   const data = await adminServices.editVendor(vendorId, payload)
+
+   res.status(201).json({
+      message: "success",
+      error: false,
+      data: data
+   })
 }
