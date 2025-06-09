@@ -190,15 +190,38 @@ export const destroyVendorController = async (req: Request, res: Response) => {
    }
 }
 
+//========================== edit controller ===================
+
+export const getOneVendorController = async (req: Request, res: Response) => {
+   try {
+      const { vendorId } = req.params
+      const data = await adminServices.getOneVendor(vendorId)
+
+      res.status(200).json({
+         message: "success",
+         error: false,
+         data: data
+      })
+      
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
 export const putVendorController = async (req: Request, res: Response) => {
-   const { vendorId } = req.params
-   const payload = req.body
+   try {
+      const { vendorId } = req.params
+      const payload = req.body
 
-   const data = await adminServices.editVendor(vendorId, payload)
+      const data = await adminServices.editVendor(vendorId, payload)
 
-   res.status(201).json({
-      message: "success",
-      error: false,
-      data: data
-   })
+      res.status(201).json({
+         message: "success",
+         error: false,
+         data: data
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+
 }

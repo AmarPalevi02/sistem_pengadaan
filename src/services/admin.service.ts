@@ -158,6 +158,17 @@ export const destroyVendor = async (vendorId: string) => {
    }
 }
 
+// ======================== edit servicee =================================
+
+export const getOneVendor = async (vendorId: string) => {
+   const vendor = await prisma.vendor.findUnique({
+      where: { id: vendorId },
+      select: { id: true, name: true, email: true, phone: true, address: true }
+   })
+
+   return vendor
+}
+
 export const editVendor = async (vendorId: string, data: CreateVendor) => {
    const checkVendor = await prisma.vendor.findUnique({
       where: { id: vendorId },

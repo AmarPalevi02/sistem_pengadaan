@@ -110,5 +110,11 @@ router.put(
    userController.putVendorController
 )
 
+router.get(
+   '/vendor/get/:vendorId',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getOneVendorController
+)
 
 export default router;
