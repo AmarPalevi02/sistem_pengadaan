@@ -3,9 +3,19 @@ import { NotFound } from "../errors"
 import { CreateVendor, UpdateUser, UpdateVendor } from "../types/createUser";
 import { hashedPassword } from "../utils/bcrypt";
 
+export const getOneUser = async (userId: string) => {
+   const getOneAcount = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, name: true, password: true, role: true }
+   })
+
+   return getOneAcount
+}
+
 export const updateUser = async (userId: string, data: UpdateUser) => {
    const checkUserById = await prisma.user.findUnique({
-      where: { id: userId }
+      where: { id: userId },
+      select: { id: true }
    })
 
    if (!checkUserById) throw new NotFound("User is not found")

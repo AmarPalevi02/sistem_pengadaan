@@ -1,6 +1,22 @@
 import * as adminServices from "../services/admin.service"
 import { Request, Response } from 'express';
 
+export const getOneAcountController = async (req: Request, res: Response) => {
+   try {
+      const { userId } = req.params
+
+      const data = await adminServices.getOneUser(userId)
+
+      res.status(200).json({
+         message: "success",
+         error: false,
+         data: data
+      })
+   } catch (error: any) {
+      res.status(400).json({ error: error.message });
+   }
+}
+
 export const updateUser = async (req: Request, res: Response) => {
    try {
       const { userId } = req.params;
@@ -11,8 +27,7 @@ export const updateUser = async (req: Request, res: Response) => {
       res.status(200).json({
          message: "Succes update user",
          data: updatedUser
-      }
-      );
+      });
    } catch (error: any) {
       res.status(400).json({ error: error.message });
    }
@@ -202,7 +217,7 @@ export const getOneVendorController = async (req: Request, res: Response) => {
          error: false,
          data: data
       })
-      
+
    } catch (error: any) {
       res.status(400).json({ error: error.message });
    }

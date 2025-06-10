@@ -10,7 +10,15 @@ router.post(
    '/createakun',
    authenticate,
    authorizeRole(['ADMIN']),
-   authController.register)
+   authController.register
+)
+
+router.get(
+   'get/user/:userId',
+   authenticate,
+   authorizeRole(['ADMIN']),
+   userController.getOneAcountController
+)
 
 router.put(
    '/update/:userId',
