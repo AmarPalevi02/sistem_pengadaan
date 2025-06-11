@@ -14,7 +14,7 @@ router.post(
 )
 
 router.get(
-   'get/user/:userId',
+   '/get/user/:userId',
    authenticate,
    authorizeRole(['ADMIN']),
    userController.getOneAcountController

@@ -6,16 +6,19 @@ import { hashedPassword } from "../utils/bcrypt";
 export const getOneUser = async (userId: string) => {
    const getOneAcount = await prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true, name: true, password: true, role: true }
+      select: { id: true, name: true, password: true, email: true, role: true }
    })
-
+   // console.log(getOneAcount)
+   if (getOneAcount?.password) {
+      console.log('Password is hashed:', getOneAcount.password.startsWith('$2'));
+   }
    return getOneAcount
 }
 
 export const updateUser = async (userId: string, data: UpdateUser) => {
    const checkUserById = await prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true }
+      // select: { id: true }
    })
 
    if (!checkUserById) throw new NotFound("User is not found")
